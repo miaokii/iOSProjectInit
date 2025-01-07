@@ -1,0 +1,76 @@
+PODS:
+  - Alamofire (5.10.1)
+  - CocoaLumberjack/Core (3.8.5)
+  - CocoaLumberjack/Swift (3.8.5):
+    - CocoaLumberjack/Core
+  - DZNEmptyDataSet (1.8.1)
+  - HBDNavigationBar (1.9.8)
+  - IQKeyboardManagerSwift (7.0.0)
+  - JTAppleCalendar (8.0.5)
+  - KakaJSON (1.1.2)
+  - Kingfisher (8.1.0)
+  - LookinServer (1.2.8):
+    - LookinServer/Core (= 1.2.8)
+  - LookinServer/Core (1.2.8)
+  - MJRefresh (3.7.9)
+  - R.swift (7.8.0)
+  - SKPhotoBrowser (7.1.0)
+  - SnapKit (5.7.1)
+  - TextAttributes (2.0.2)
+  - TTTAttributedLabel (2.0.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - CocoaLumberjack/Swift
+  - DZNEmptyDataSet
+  - HBDNavigationBar (~> 1.9.8)
+  - IQKeyboardManagerSwift (= 7.0.0)
+  - JTAppleCalendar
+  - KakaJSON
+  - Kingfisher
+  - LookinServer
+  - MJRefresh
+  - R.swift
+  - SKPhotoBrowser
+  - SnapKit
+  - TextAttributes
+  - TTTAttributedLabel
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - CocoaLumberjack
+    - DZNEmptyDataSet
+    - HBDNavigationBar
+    - IQKeyboardManagerSwift
+    - JTAppleCalendar
+    - KakaJSON
+    - Kingfisher
+    - LookinServer
+    - MJRefresh
+    - R.swift
+    - SKPhotoBrowser
+    - SnapKit
+    - TextAttributes
+    - TTTAttributedLabel
+
+SPEC CHECKSUMS:
+  Alamofire: 840d2a1ad82355b536ec6ba5f97e5bfa54600ca3
+  CocoaLumberjack: 6a459bc897d6d80bd1b8c78482ec7ad05dffc3f0
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  HBDNavigationBar: f6aaedfb1ead68975b22b893ec61bfc1946711f5
+  IQKeyboardManagerSwift: bd69f3a49f6ead9cb6ce17723cf0c6c9b948d83e
+  JTAppleCalendar: 16c6501b22cb27520372c28b0a2e0b12c8d0cd73
+  KakaJSON: cc5ff50a8c1cfbb09413db8496cb709a209e6137
+  Kingfisher: dfbf20b6249ed4ef6f18d6a96c847bce860bdb95
+  LookinServer: 1b2b61c6402ae29fa22182d48f5cd067b4e99e80
+  MJRefresh: ff9e531227924c84ce459338414550a05d2aea78
+  R.swift: f573269ca45b2ab066c082e363dd4c2b297b0d71
+  SKPhotoBrowser: cd95b95a6f352fc2a50992721299f75ead77f9ab
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
+  TextAttributes: 89905fb52c36de587010f335bd4071463d9c6d9b
+  TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
+
+PODFILE CHECKSUM: d7623594d78755b4c2990378e6e712d862d57608
+
+COCOAPODS: 1.14.3
