@@ -13,16 +13,11 @@ import SnapKit
 extension JXPagingListContainerView: JXSegmentedViewListContainer {}
 
 protocol HeaderPagerLoadingProtocol {
-    /// 设置应用和操作类型
-    func set(application: SaaSApp, appHandelType: SaaSAppHandleType, workID: String)
-    /// 设置客户详情
-    func set(workInfo: AFParam)
     /// 加载新数据，加载后调用completion
     func headerPagerloading(completion: @escaping (String?)->Void)
 }
 
 extension HeaderPagerLoadingProtocol {
-    func set(application: SaaSApp, appHandelType: SaaSHandleType, workID: String) {}
     func headerPagerloading(completion: @escaping (String?)->Void) {}
     func set(workInfo: AFParam) {}
 }
@@ -141,8 +136,6 @@ class HeaderPagerListController<Element>: MKTableViewController<Element>, JXPagi
     var listViewDidScrollCallback: ((UIScrollView) -> ())?
     var workID = ""
     var workInfo = AFParam()
-    var application: SaaSApp!
-    var appHandleType: SaaSAppHandleType = .other
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,7 +148,7 @@ class HeaderPagerListController<Element>: MKTableViewController<Element>, JXPagi
         listViewDidScrollCallback = nil
     }
         
-    func listView() -> UIView {
+    override func listView() -> UIView {
         view
     }
     
@@ -173,12 +166,6 @@ class HeaderPagerListController<Element>: MKTableViewController<Element>, JXPagi
     
     func headerPagerloading(completion: @escaping (String?) -> Void) {
         
-    }
-    
-    func set(application: SaaSApp, appHandelType: SaaSAppHandleType, workID: String) {
-        self.workID = workID
-        self.application = application
-        self.appHandleType = appHandelType
     }
     
     func set(workInfo: AFParam) {

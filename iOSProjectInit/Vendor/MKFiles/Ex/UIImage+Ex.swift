@@ -11,6 +11,11 @@ import UIKit
 
 // MARK: - Init Color
 public extension UIImage {
+    
+    static func hex(_ hex: UInt32) -> UIImage? {
+        .init(color: .init(hex))
+    }
+    
     /// 根据颜色生成图片
     /// - Parameters:
     ///   - color: 颜色

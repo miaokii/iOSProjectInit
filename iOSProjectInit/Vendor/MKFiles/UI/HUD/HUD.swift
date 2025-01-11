@@ -186,7 +186,7 @@ class HUD: NSObject {
     /// - Parameters:
     ///   - content: hud类型
     ///   - onView: 父视图
-    static func show(_ content: HUDContentType, onView: UIView? = nil) {
+    static func show(_ content: HUDContentType, onView: UIView? = nil, onHandHideBlock: NoParamBlock? = nil) {
         switch content {
         case .success:
             show(.labelSuccess(title: nil, detail: nil), onView: onView)
@@ -210,7 +210,7 @@ class HUD: NSObject {
             show(.labelCustomView(view: view, title: nil, detail: nil), onView: onView)
             
         case let .label(title, detail):
-            textHUD(text: title, detail: detail, onView: onView)
+            textHUD(text: title, detail: detail, onView: onView, onHandHideBlock: onHandHideBlock)
             
         case let .labelDeterminate(progress, style, title, complete):
             determinateHUD(progress: progress, style: style, title: title, onView: onView, complete: complete)
@@ -232,15 +232,15 @@ class HUD: NSObject {
             
         case let .labelImage(image, title, detail):
             let imageView = UIImageView.init(image: image?.withRenderingMode(.alwaysTemplate))
-            customHUD(view: imageView, title: title, detail: detail, onView: onView)
+            customHUD(view: imageView, title: title, detail: detail, onView: onView, onHandHideBlock: onHandHideBlock)
             
         case let .labelRotatingImage(image, clockwise, title, detail):
             let imageView = UIImageView.init(image: image?.withRenderingMode(.alwaysTemplate))
             imageView.layer.add(HUD.rotationAnimation(clockwise), forKey: "progressAnimation")
-            customHUD(view: imageView, title: title, detail: detail, onView: onView)
+            customHUD(view: imageView, title: title, detail: detail, onView: onView, onHandHideBlock: onHandHideBlock)
             
         case let .labelCustomView(view, title, detail):
-            customHUD(view: view, title: title, detail: detail, onView: onView)
+            customHUD(view: view, title: title, detail: detail, onView: onView, onHandHideBlock: onHandHideBlock)
         }
     }
     
@@ -343,17 +343,19 @@ class HUD: NSObject {
         newHUD.detailsLabel.text = detail
     }
     
-    private static func customHUD(view: UIView, title: String? = nil, detail: String? = nil, onView: UIView? = nil) {
+    private static func customHUD(view: UIView, title: String? = nil, detail: String? = nil, onView: UIView? = nil, onHandHideBlock: NoParamBlock? = nil) {
         let newHUD = configHUD(onView: onView, mode: .customView)
         newHUD.customView = view
         newHUD.label.text = title
         newHUD.detailsLabel.text = detail
+        newHUD.hideOnHandBlock = onHandHideBlock
     }
     
-    private static func textHUD(text: String?, detail: String?, onView: UIView? = nil) {
+    private static func textHUD(text: String?, detail: String?, onView: UIView? = nil, onHandHideBlock: NoParamBlock? = nil) {
         let newHUD = configHUD(onView: onView, mode: .text)
         newHUD.label.text = text
         newHUD.label.numberOfLines = 5
+        newHUD.hideOnHandBlock = onHandHideBlock
         if let detail = detail {
             newHUD.detailsLabel.text = detail
             newHUD.detailsLabel.numberOfLines = 5

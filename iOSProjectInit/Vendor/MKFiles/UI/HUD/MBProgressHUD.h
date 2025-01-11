@@ -333,6 +333,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// -1表示不启用该功能，>0表示延迟多少秒显示
 @property (nonatomic, assign) NSTimeInterval exceptionDelayHideSec;
 
+// 手动隐藏时，回调
+@property (copy, nullable) MBProgressHUDCompletionBlock hideOnHandBlock;
+
 @end
 
 

@@ -26,7 +26,7 @@ class MKScrollViewController: MKBaseViewController {
         scrollView.addSubview(container)
         container.snp.makeConstraints { make in
             make.edges.equalTo(0)
-            make.width.equalTo(view)
+            make.width.equalToSuperview()
         }
         return container
     }()

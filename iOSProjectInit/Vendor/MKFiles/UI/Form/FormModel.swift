@@ -38,7 +38,7 @@ class FormModel {
     /// 允许编辑
     var isEditEnable = true
     /// cell类型
-    var cellType: FromBaseCell.Type = FromBaseCell.self
+    var cellType: FormBaseCell.Type = FormBaseCell.self
     /// 对齐方式
     var aligment: NSTextAlignment = .left
     /// 必填项 显示为 红色的 *
@@ -57,6 +57,12 @@ class FormModel {
     var accessoryType: UITableViewCell.AccessoryType = .none
     /// 附件视图
     var accessoryView: UIView? = nil
+    
+    /// 存储值
+    var object: Any?
+    /// 存储值，多个
+    var objects: [Any]?
+    
     /// 附属
     var param: [String: Any?] = [:]
     /// 是否为空
@@ -89,6 +95,13 @@ class FormModel {
         } else {
             self.label = value
         }
+    }
+    
+    func clear() {
+        value = ""
+        label = ""
+        object = nil
+        objects = nil
     }
 }
 

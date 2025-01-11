@@ -185,6 +185,13 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
     }
 }
 
+- (void)hideOnHand {
+    if (self.hideOnHandBlock) {
+        self.hideOnHandBlock();
+    }
+    [self hideAnimated:YES];
+}
+
 - (void)hideAnimated:(BOOL)animated {
     MBMainThreadAssert();
     [self.graceTimer invalidate];
@@ -412,7 +419,7 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
     button.titleLabel.font = [UIFont boldSystemFontOfSize:MBDefaultDetailsLabelFontSize];
     [button setTitle:@"取消" forState:UIControlStateNormal];
     [button setTitleColor:defaultColor forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(hideAnimated:) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(hideOnHand) forControlEvents:UIControlEventTouchUpInside];
     _button = button;
     
     [stackView addArrangedSubview:label];

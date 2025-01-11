@@ -78,6 +78,7 @@ struct Account {
             _userToken.remove()
             _userJson.remove()
         }
+        postNotification(name: .refreshUserInfo)
     }
     
     static func logout() {
@@ -89,11 +90,6 @@ struct Account {
         if !Self.userJson.isEmpty {
             user = model(from: Self.userJson, User.self)
         }
-    }
-    
-    private static func refresh(user: User) {
-        shared.user = user
-        userJson = user.kj.JSONObject()
     }
     
     /// 刷新用户信息

@@ -177,10 +177,10 @@ extension UIImage {
     static let checkmark: UIImage? = .init(systemName: "checkmark")
     static let folderPlus: UIImage? = .init(systemName: "folder.badge.plus")
     
-    static let checkSquare: UIImage? = .init(systemName: "checkmark.square")
+    static let checkSquare: UIImage? = .init(systemName: "square")
     static let checkSquareFill: UIImage? = .init(systemName: "checkmark.square.fill")
     
-    static let checkCircle: UIImage? = .init(systemName: "checkmark.circle")
+    static let checkCircle: UIImage? = .init(systemName: "circle")
     static let checkCircleFill: UIImage? = .init(systemName: "checkmark.circle.fill")
 }
 

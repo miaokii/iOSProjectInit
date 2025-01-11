@@ -55,6 +55,11 @@ extension String {
 // 格式化金额
 extension String {
     
+    static func string(value: Double, formatter:(NumberFormatter)->Void) -> String {
+        let amountFormatter = NumberFormatter.init()
+        formatter(amountFormatter)
+        return amountFormatter.string(from: NSNumber.init(value: value)) ?? ""
+    }
     /// 格式化金额
     /// - Parameters:
     ///   - value: 金额值

@@ -82,7 +82,7 @@
 		DD66449C2D2D1E3E00AB8682 /* LoggerLocalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6643F72D2D1E3E00AB8682 /* LoggerLocalController.swift */; };
 		DD66449D2D2D1E3E00AB8682 /* CircleClipRotateAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6644292D2D1E3E00AB8682 /* CircleClipRotateAnimation.swift */; };
 		DD66449E2D2D1E3E00AB8682 /* MKPopParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66443A2D2D1E3E00AB8682 /* MKPopParentView.swift */; };
-		DD66449F2D2D1E3E00AB8682 /* FromCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6643FF2D2D1E3E00AB8682 /* FromCell.swift */; };
+		DD66449F2D2D1E3E00AB8682 /* FormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6643FF2D2D1E3E00AB8682 /* FormCell.swift */; };
 		DD6644A02D2D1E3E00AB8682 /* ChooseServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6643D62D2D1E3E00AB8682 /* ChooseServer.swift */; };
 		DD6644A12D2D1E3E00AB8682 /* MKVerifyCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66444E2D2D1E3E00AB8682 /* MKVerifyCodeView.swift */; };
 		DD6644A22D2D1E3E00AB8682 /* FileHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6643BF2D2D1E3E00AB8682 /* FileHandle.swift */; };
@@ -143,6 +143,13 @@
 		DD6644D92D2D1E3E00AB8682 /* LGButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD6644172D2D1E3E00AB8682 /* LGButton.xib */; };
 		DD6644DA2D2D1E3E00AB8682 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD6644162D2D1E3E00AB8682 /* Ionicons.ttf */; };
 		DD6644DB2D2D1E3E00AB8682 /* octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD66441A2D2D1E3E00AB8682 /* octicons.ttf */; };
+		DDA120D12D32233C00D05E38 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA120D02D32233C00D05E38 /* LocationManager.swift */; };
+		DDA120D82D323A3B00D05E38 /* JXPagingListContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA120D62D323A3B00D05E38 /* JXPagingListContainerView.swift */; };
+		DDA120D92D323A3B00D05E38 /* JXPagingMainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA120D22D323A3B00D05E38 /* JXPagingMainTableView.swift */; };
+		DDA120DA2D323A3B00D05E38 /* JXPagingSmoothView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA120D32D323A3B00D05E38 /* JXPagingSmoothView.swift */; };
+		DDA120DB2D323A3B00D05E38 /* JXPagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA120D42D323A3B00D05E38 /* JXPagingView.swift */; };
+		DDA120DC2D323A3B00D05E38 /* JXPagingListRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA120D52D323A3B00D05E38 /* JXPagingListRefreshView.swift */; };
+		DDB666C62D2EAB37000BA9F4 /* CarPlateNumInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB666C52D2EAB37000BA9F4 /* CarPlateNumInputView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -213,7 +220,7 @@
 		DD6643FB2D2D1E3E00AB8682 /* MKWeakProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MKWeakProxy.m; sourceTree = "<group>"; };
 		DD6643FC2D2D1E3E00AB8682 /* WeakProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakProxy.swift; sourceTree = "<group>"; };
 		DD6643FE2D2D1E3E00AB8682 /* FormModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormModel.swift; sourceTree = "<group>"; };
-		DD6643FF2D2D1E3E00AB8682 /* FromCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FromCell.swift; sourceTree = "<group>"; };
+		DD6643FF2D2D1E3E00AB8682 /* FormCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCell.swift; sourceTree = "<group>"; };
 		DD6644002D2D1E3E00AB8682 /* MKStaticTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKStaticTableController.swift; sourceTree = "<group>"; };
 		DD6644012D2D1E3E00AB8682 /* StaticTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTableCell.swift; sourceTree = "<group>"; };
 		DD6644022D2D1E3E00AB8682 /* StaticTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTableModel.swift; sourceTree = "<group>"; };
@@ -288,6 +295,13 @@
 		DD6644532D2D1E3E00AB8682 /* MK.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MK.xcassets; sourceTree = "<group>"; };
 		DD6644552D2D1E3E00AB8682 /* MKBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKBridge.swift; sourceTree = "<group>"; };
 		DD6644DF2D2D1FD800AB8682 /* bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bridging-Header.h"; sourceTree = "<group>"; };
+		DDA120D02D32233C00D05E38 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		DDA120D22D323A3B00D05E38 /* JXPagingMainTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JXPagingMainTableView.swift; sourceTree = "<group>"; };
+		DDA120D32D323A3B00D05E38 /* JXPagingSmoothView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JXPagingSmoothView.swift; sourceTree = "<group>"; };
+		DDA120D42D323A3B00D05E38 /* JXPagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JXPagingView.swift; sourceTree = "<group>"; };
+		DDA120D52D323A3B00D05E38 /* JXPagingListRefreshView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JXPagingListRefreshView.swift; sourceTree = "<group>"; };
+		DDA120D62D323A3B00D05E38 /* JXPagingListContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JXPagingListContainerView.swift; sourceTree = "<group>"; };
+		DDB666C52D2EAB37000BA9F4 /* CarPlateNumInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlateNumInputView.swift; sourceTree = "<group>"; };
 		E010709A190925B2A2EEF08A /* Pods_iOSProjectInit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSProjectInit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -382,6 +396,7 @@
 				DD6643CB2D2D1E3E00AB8682 /* CollectionView.swift */,
 				DD6643CC2D2D1E3E00AB8682 /* SearchBar.swift */,
 				DD6643CD2D2D1E3E00AB8682 /* MKMultiSelectView.swift */,
+				DDB666C52D2EAB37000BA9F4 /* CarPlateNumInputView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -405,6 +420,7 @@
 				DD6643D62D2D1E3E00AB8682 /* ChooseServer.swift */,
 				DD6643D72D2D1E3E00AB8682 /* GlobalFunc.swift */,
 				DD6643D82D2D1E3E00AB8682 /* MD5.swift */,
+				DDA120D02D32233C00D05E38 /* LocationManager.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -501,7 +517,7 @@
 			isa = PBXGroup;
 			children = (
 				DD6643FE2D2D1E3E00AB8682 /* FormModel.swift */,
-				DD6643FF2D2D1E3E00AB8682 /* FromCell.swift */,
+				DD6643FF2D2D1E3E00AB8682 /* FormCell.swift */,
 				DD6644002D2D1E3E00AB8682 /* MKStaticTableController.swift */,
 				DD6644012D2D1E3E00AB8682 /* StaticTableCell.swift */,
 				DD6644022D2D1E3E00AB8682 /* StaticTableModel.swift */,
@@ -677,6 +693,7 @@
 		DD6644562D2D1E3E00AB8682 /* MKFiles */ = {
 			isa = PBXGroup;
 			children = (
+				DDA120D72D323A3B00D05E38 /* JXPagingView */,
 				DD6643E32D2D1E3E00AB8682 /* Base */,
 				DD6643E62D2D1E3E00AB8682 /* Define */,
 				DD6643F32D2D1E3E00AB8682 /* Ex */,
@@ -706,6 +723,18 @@
 				DD6644DF2D2D1FD800AB8682 /* bridging-Header.h */,
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		DDA120D72D323A3B00D05E38 /* JXPagingView */ = {
+			isa = PBXGroup;
+			children = (
+				DDA120D22D323A3B00D05E38 /* JXPagingMainTableView.swift */,
+				DDA120D32D323A3B00D05E38 /* JXPagingSmoothView.swift */,
+				DDA120D42D323A3B00D05E38 /* JXPagingView.swift */,
+				DDA120D52D323A3B00D05E38 /* JXPagingListRefreshView.swift */,
+				DDA120D62D323A3B00D05E38 /* JXPagingListContainerView.swift */,
+			);
+			path = JXPagingView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -895,6 +924,7 @@
 				DD66447F2D2D1E3E00AB8682 /* String+Ex.swift in Sources */,
 				DD6644802D2D1E3E00AB8682 /* AFResult.swift in Sources */,
 				DD6644812D2D1E3E00AB8682 /* FontIon.swift in Sources */,
+				DDB666C62D2EAB37000BA9F4 /* CarPlateNumInputView.swift in Sources */,
 				DD6644822D2D1E3E00AB8682 /* LoadingIndicatorView.swift in Sources */,
 				DD6644832D2D1E3E00AB8682 /* FontOpenic.swift in Sources */,
 				DD6644842D2D1E3E00AB8682 /* Theme.swift in Sources */,
@@ -924,7 +954,7 @@
 				DD66449C2D2D1E3E00AB8682 /* LoggerLocalController.swift in Sources */,
 				DD66449D2D2D1E3E00AB8682 /* CircleClipRotateAnimation.swift in Sources */,
 				DD66449E2D2D1E3E00AB8682 /* MKPopParentView.swift in Sources */,
-				DD66449F2D2D1E3E00AB8682 /* FromCell.swift in Sources */,
+				DD66449F2D2D1E3E00AB8682 /* FormCell.swift in Sources */,
 				DD6644A02D2D1E3E00AB8682 /* ChooseServer.swift in Sources */,
 				DD6644A12D2D1E3E00AB8682 /* MKVerifyCodeView.swift in Sources */,
 				DD6644A22D2D1E3E00AB8682 /* FileHandle.swift in Sources */,
@@ -940,6 +970,11 @@
 				DD6644AC2D2D1E3E00AB8682 /* KeyBoardInputView.swift in Sources */,
 				DD6644AD2D2D1E3E00AB8682 /* MKDatePickerView.swift in Sources */,
 				DD6644AE2D2D1E3E00AB8682 /* BallTranslationAnimation.swift in Sources */,
+				DDA120D82D323A3B00D05E38 /* JXPagingListContainerView.swift in Sources */,
+				DDA120D92D323A3B00D05E38 /* JXPagingMainTableView.swift in Sources */,
+				DDA120DA2D323A3B00D05E38 /* JXPagingSmoothView.swift in Sources */,
+				DDA120DB2D323A3B00D05E38 /* JXPagingView.swift in Sources */,
+				DDA120DC2D323A3B00D05E38 /* JXPagingListRefreshView.swift in Sources */,
 				DD6644AF2D2D1E3E00AB8682 /* APIPath.swift in Sources */,
 				DD6644B02D2D1E3E00AB8682 /* QRMaker.swift in Sources */,
 				DD6644B12D2D1E3E00AB8682 /* AFLog.swift in Sources */,
@@ -952,6 +987,7 @@
 				DD6644B82D2D1E3E00AB8682 /* MD5.swift in Sources */,
 				DD6644B92D2D1E3E00AB8682 /* FontLoader.swift in Sources */,
 				DD6644BA2D2D1E3E00AB8682 /* TabbarController.swift in Sources */,
+				DDA120D12D32233C00D05E38 /* LocationManager.swift in Sources */,
 				DD6644BB2D2D1E3E00AB8682 /* KKEx.swift in Sources */,
 				DD6644BC2D2D1E3E00AB8682 /* Data+Ex.swift in Sources */,
 				DD6644BD2D2D1E3E00AB8682 /* TableView.swift in Sources */,

@@ -19,6 +19,7 @@ enum AFType {
     case get
     case postForm
     case postJSON
+    // 请求为post，参数编码到url中
     case postGet
     case delete
     case upload(files:[(String, Any)])
@@ -47,12 +48,23 @@ class AF {
     private static let shared = AF()
     private var sessionManager: Alamofire.Session!
     /// 请求集合
-    private var requests = [Request]()
+    private var requests = [UUID: Request]()
     
     deinit {
-        requests.forEach({ (req) in
-            if !req.isCancelled { req.cancel() }
+        requests.forEach({ (key, req) in
+            if !req.isCancelled {
+                req.cancel()
+            }
         })
+    }
+    
+    static func remove(uuid: UUID) {
+        if let requst = shared.requests[uuid] {
+            if !requst.isCancelled {
+                requst.cancel()
+            }
+            shared.requests.removeValue(forKey: uuid)
+        }
     }
     
     init() {
@@ -76,7 +88,8 @@ class AF {
     ///   - model: model类型
     ///   - progressHandle: 如果是上传文件，这里可以获取进度
     ///   - completeHandle: 请求结果回调
-    func request<ModelType: Model>(type: AFType = .postForm, path: AFPath, param: AFParam = [:], header: AFParam = [:], model: ModelType.Type = EmptyModel.self, queue: DispatchQueue? = nil, progressHandle: ((Progress) -> Void)? = nil, completeHandle: @escaping (Result<AFResult<ModelType>, Error>)->Void) {
+    @discardableResult
+    func request<ModelType: Model>(type: AFType = .postForm, path: AFPath, param: AFParam = [:], header: AFParam = [:], model: ModelType.Type = EmptyModel.self, queue: DispatchQueue? = nil, progressHandle: ((Progress) -> Void)? = nil, completeHandle: @escaping (Result<AFResult<ModelType>, Error>)->Void) -> UUID {
         
         let requestModifier: Session.RequestModifier = { [weak self] request in
             self?.modifierRequest(&request, type: type, param: param, header: header)
@@ -90,7 +103,7 @@ class AF {
                     if let filePath = file.1 as? String {
                         let fileUrl = URL.init(fileURLWithPath: filePath)
                         multipartFormData.append(fileUrl, withName: "file")
-                    } 
+                    }
                     // 文件data
                     else if let fileData = file.1 as? Data {
                         multipartFormData.append(fileData, withName: "file", fileName: file.0)
@@ -105,14 +118,24 @@ class AF {
             dataReqeust = sessionManager.request(fullPath(path), method: type.method, parameters: param, encoding: type.encoding, requestModifier: requestModifier)
         }
         
+        let uuid = dataReqeust.id
         dataReqeust.responseData(queue: queue ?? .main, completionHandler: { response in
+            Self.remove(uuid: uuid)
             let result = response.map(AFResult<ModelType>.self)
+            // 手动取消的请求
+            if case let .failure(error) = result,
+               let afError = error as? AFError {
+                if afError.isExplicitlyCancelledError {
+                    return
+                }
+            }
             guard Self.loginValid(result) else {
                 return
             }
             completeHandle(result)
         })
-        requests.append(dataReqeust)
+        requests[uuid] = dataReqeust
+        return uuid
     }
     
     /// 类请求方法
@@ -123,8 +146,9 @@ class AF {
     ///   - model: model类型
     ///   - progressHandle: 如果是上传文件，这里可以获取进度
     ///   - completeHandle: 请求结果回调
-    static func request<ModelType: Model>(type: AFType = .postForm, path: AFPath, param: AFParam = [:], header: AFParam = [:], model: ModelType.Type = EmptyModel.self, queue: DispatchQueue? = nil, progressHandle: ((Progress) -> Void)? = nil, completeHandle: @escaping (Result<AFResult<ModelType>, Error>)->Void) {
-        shared.request(type: type, path: path, param: param, header: header, model: model, queue: queue, progressHandle: progressHandle, completeHandle: completeHandle)
+    @discardableResult
+    static func request<ModelType: Model>(type: AFType = .postForm, path: AFPath, param: AFParam = [:], header: AFParam = [:], model: ModelType.Type = EmptyModel.self, queue: DispatchQueue? = nil, progressHandle: ((Progress) -> Void)? = nil, completeHandle: @escaping (Result<AFResult<ModelType>, Error>)->Void) -> UUID {
+        return shared.request(type: type, path: path, param: param, header: header, model: model, queue: queue, progressHandle: progressHandle, completeHandle: completeHandle)
     }
     
     /// 注入请求头，或其他
@@ -133,7 +157,8 @@ class AF {
         guard Account.userToken.notEmpty else {
             return
         }
-        request.headers.add(.authorization(bearerToken: Account.userToken))
+        request.headers.add(name: "token", value: Account.userToken)
+        //request.headers.add(.authorization(bearerToken: Account.userToken))
         header.forEach { key, value in
             request.headers.add(name: key, value: string(value: value))
         }

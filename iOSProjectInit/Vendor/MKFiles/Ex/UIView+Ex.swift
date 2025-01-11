@@ -334,7 +334,8 @@ extension UIView {
         return image
     }
     
-    func shake() {
+    func shake(offset:CGFloat = 5, vertical: Bool = false, duration: CGFloat = 0.25) {
+        /**
         // 偏移值
         let t: CGFloat = 5.0
         // 左摇
@@ -353,5 +354,27 @@ extension UIView {
                 }
             }
         }
+         */
+        
+        let keyPath = vertical ? "transform.translation.y" : "transform.translation.x"
+        
+        let animation = CAKeyframeAnimation.init(keyPath: keyPath)
+        animation.values = [0, -offset/2, offset/2, -offset, offset, offset/2, -offset/2, 0]
+        animation.keyTimes = [0, .init(floatLiteral: 1/6.0),
+                              .init(floatLiteral: 2/6.0),
+                              .init(floatLiteral: 3/6.0),
+                              .init(floatLiteral: 4/6.0),
+                              .init(floatLiteral: 5/6.0),
+                              .init(floatLiteral: 1.0)]
+        animation.timingFunctions = [
+            .init(name: .easeOut),
+            .init(name: .easeOut),
+            .init(name: .easeOut),
+            .init(name: .easeOut),
+            .init(name: .easeOut),
+            .init(name: .easeOut),
+        ]
+        animation.duration = 0.5
+        self.layer.addAnimation(animation)
     }
 }

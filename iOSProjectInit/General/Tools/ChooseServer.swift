@@ -285,7 +285,8 @@ fileprivate extension UserDefaults {
 
 
 fileprivate class NewCustomerServerView: MKPopParentView {
-    var textField: MKTextField!
+    var ipField: MKTextField!
+    var portField: MKTextField!
     var localBtn: UIButton!
     var aesBtn: UIButton!
     
@@ -305,34 +306,45 @@ fileprivate class NewCustomerServerView: MKPopParentView {
             make.left.top.equalTo(20)
         }
         
-        textField = MKTextField.init(superView: contentView, textColor: .textColorBlack, placeHolder: "请输入地址", font: .regular(16), aligment: .left, keyboardType: .decimalPad)
-        textField.addBlank(width: 15)
-        textField.snp.makeConstraints { make in
+        ipField = MKTextField.init(superView: contentView, textColor: .textColorBlack, placeHolder: "ip/地址", font: .regular(16), aligment: .left, keyboardType: .decimalPad)
+        ipField.addBlank(width: 10)
+        ipField.snp.makeConstraints { make in
             make.left.equalTo(label)
             make.top.equalTo(label.snp.bottom).offset(20)
             make.height.equalTo(40)
+            make.width.equalToSuperview().multipliedBy(0.55)
+        }
+        
+        portField = MKTextField.init(superView: contentView, textColor: .textColorBlack, placeHolder: "端口", font: .regular(16), aligment: .left, keyboardType: .decimalPad)
+        portField.text = "8090"
+        portField.clearsOnBeginEditing = true
+        portField.snp.makeConstraints { make in
+            make.left.equalTo(ipField.snp.right).offset(5)
+            make.top.height.equalTo(ipField)
             make.right.equalTo(-20)
         }
         
         let separator = UIView.init(super: contentView, backgroundColor: .background)
         separator.snp.makeConstraints { make in
-            make.left.right.bottom.equalTo(textField)
+            make.left.bottom.equalTo(ipField)
+            make.right.equalTo(portField)
             make.height.equalTo(1)
         }
         
         localBtn = .init(superView: contentView, title: " 本地化", titleColor: .textColorGray, normalImage: .checkSquare, selectedImage: .checkSquareFill, font: .regular(14))
         localBtn.snp.makeConstraints { make in
             make.left.equalTo(label)
-            make.top.equalTo(textField.snp.bottom).offset(20)
+            make.top.equalTo(ipField.snp.bottom).offset(20)
         }
-        localBtn.setClosure { sender in
+        localBtn.setClosure {[weak self] sender in
+            self?.portField.text = "15081"
             sender.isSelected.toggle()
         }
         
         aesBtn = .init(superView: contentView, title: " 加密", titleColor: .textColorGray, normalImage: .checkSquare, selectedImage: .checkSquareFill, font: .regular(14))
         aesBtn.snp.makeConstraints { make in
             make.left.equalTo(localBtn.snp.right).offset(40)
-            make.top.equalTo(textField.snp.bottom).offset(20)
+            make.top.equalTo(ipField.snp.bottom).offset(20)
         }
         aesBtn.setClosure { sender in
             sender.isSelected.toggle()
@@ -359,20 +371,19 @@ fileprivate class NewCustomerServerView: MKPopParentView {
     }
     
     private func addNewConfig() {
-        guard var ip = textField.text, ip.isIP else {
-            return HUD.flash(warning: "IP错误", onView: self)
+        guard var ip = ipField.text, ip.isIP else {
+            return HUD.flash(warning: "ip错误", onView: self)
         }
         
         if !ip.hasPrefix("http") {
             ip = "http://"+ip
         }
         
-        var port = "8090"
-        if localBtn.isSelected {
-            port = "15081"
-        }
+        var port = portField.text ?? ""
         
-        ip = "\(ip):\(port)/"
+        if port.notEmpty {
+            ip = "\(ip):\(port)/"
+        }
         
         var config = ServerConfig.init(type: .custom)
         config.urlName = ip

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class StaticTableCell: FromBaseCell {
+class StaticTableCell: FormBaseCell {
     
     var iconView: UIImageView!
     var detailLabel: UILabel!

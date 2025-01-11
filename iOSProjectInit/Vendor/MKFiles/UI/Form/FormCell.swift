@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class FromBaseCell: KKTableCell {
+class FormBaseCell: KKTableCell {
     
     var titleLabel = UILabel.init()
     var formModel: FormModel!
@@ -48,7 +48,7 @@ class FromBaseCell: KKTableCell {
 }
 
 
-class FormInputTextCell: FromBaseCell {
+class FormInputTextCell: FormBaseCell {
     
     var valueField = MKTextField()
     /// 结束编辑

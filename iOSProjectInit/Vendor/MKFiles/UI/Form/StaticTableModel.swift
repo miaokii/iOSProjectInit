@@ -19,7 +19,6 @@ class StaticTableModel: FormModel {
     /// 点击事件
     var tapBlock: NoParamBlock? = nil
     var detailRedDot: Bool = false
-    var object: Any?
     
     static func model(icon: UIImage? = nil, title: String, detail: String? = nil, showAccess: Bool = true, tapBlock: NoParamBlock? = nil) -> StaticTableModel {
         let model = StaticTableModel.init()
