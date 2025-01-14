@@ -16,6 +16,34 @@ public extension UIImage {
         .init(color: .init(hex))
     }
     
+    
+    /// 生成渐变色
+    /// - Parameters:
+    ///   - colors: 颜色
+    ///   - size: 大小
+    ///   - start: 开始点 0-1
+    ///   - end: 结束点 0-1
+    /// - Returns: 渐变的图片
+    static func gradient(colors: [UIColor], size: CGSize = .init(width: 20, height: 20), start: CGPoint = .init(x: 0, y: 0), end: CGPoint = .init(x: 1, y: 1)) -> UIImage? {
+        // 创建一个 UIGraphicsImageRenderer
+        let renderer = UIGraphicsImageRenderer(size: size)
+        return renderer.image { context in
+            guard let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(),
+                                            colors: colors.map { $0.cgColor } as CFArray,
+                                            locations: nil) else { return }
+            
+            // 渐变的起始和结束点
+            let startPoint = CGPoint(x: size.width*start.x, y: size.height*start.y)
+            let endPoint = CGPoint(x: size.width*end.x, y: size.height*end.y)
+            
+            // 绘制渐变
+            context.cgContext.drawLinearGradient(gradient,
+                                                 start: startPoint,
+                                                 end: endPoint,
+                                                 options: [])
+        }
+    }
+    
     /// 根据颜色生成图片
     /// - Parameters:
     ///   - color: 颜色

@@ -154,7 +154,7 @@ class MKPopParentView: UIView {
         if layoutWhenKeyBoardShow {
             NotificationCenter.default.removeObserver(self)
         }
-        print("deinit \(String.init(describing: Self.self)): \(String.init(format: "%p", self))")
+        print("deinit \(String.init(describing: Self.self))")
     }
     
     override func willMove(toWindow newWindow: UIWindow?) {

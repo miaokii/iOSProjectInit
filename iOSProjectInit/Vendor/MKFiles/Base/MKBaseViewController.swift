@@ -172,7 +172,7 @@ class MKBaseViewController: UIViewController {
     
     deinit {
         kNotificationCenter.removeObserver(self)
-        print("deinit \(String.init(describing: Self.self)): \(String.init(format: "%p", self))")
+        print("deinit \(String.init(describing: Self.self))")
     }
 }
 

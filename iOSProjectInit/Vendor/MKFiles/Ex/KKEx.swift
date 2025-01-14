@@ -301,7 +301,7 @@ extension UICollectionView {
 }
 
 extension UILabel {
-    convenience init(superView: UIView?,
+    convenience init(superView: UIView? = nil,
                      text: String = "",
                      textColor: UIColor = .textColorBlack,
                      font: UIFont = .systemFont(ofSize: 14),
@@ -361,8 +361,8 @@ extension UIButton {
         
         if cornerRadius > 0 {
             self.layer.cornerRadius = cornerRadius
-            self.clipsToBounds = true
         }
+        self.clipsToBounds = cornerRadius > 0
         
         if let sView = superView as? UIStackView {
             sView.addArrangedSubview(self)

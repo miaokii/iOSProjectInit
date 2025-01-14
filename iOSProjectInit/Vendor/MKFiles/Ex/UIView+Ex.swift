@@ -25,6 +25,23 @@ extension UIWindow {
 }
 
 extension UIView {
+    func setGradientBack(colors:[UIColor], start: CGPoint = .init(x: 0, y: 0), end: CGPoint = .init(x: 1, y: 0), cornerRadius: CGFloat = 0, corners: UIRectCorner? = nil) {
+        layer.sublayers?.filter{$0.name=="gradientBackGroundLayer"}.forEach{$0.removeFromSuperlayer()}
+        let gradientLayer = CAGradientLayer.init()
+        gradientLayer.frame = self.bounds
+        gradientLayer.cornerRadius = cornerRadius
+        if let corners = corners {
+            gradientLayer.maskedCorners = .init(rawValue: corners.rawValue)
+        }
+        gradientLayer.colors = colors.map{$0.cgColor}
+        gradientLayer.startPoint = start
+        gradientLayer.endPoint = end
+        gradientLayer.name = "gradientBackGroundLayer"
+        layer.insertSublayer(gradientLayer, at: 0)
+    }
+}
+
+extension UIView {
     var contrller: UIViewController? {
         get {
             var nextResponder: UIResponder?

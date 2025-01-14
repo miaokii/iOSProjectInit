@@ -31,7 +31,7 @@ class TabbarController: UITabBarController {
     }
     
     deinit {
-        print("deinit \(String.init(describing: Self.self)): \(String.init(format: "%p", self))")
+        print("deinit \(String.init(describing: Self.self))")
     }
     
     private func setupUI() {
