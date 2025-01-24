@@ -7,7 +7,7 @@
 //
 
 import UIKit
-@preconcurrency import WebKit
+import WebKit
 
 fileprivate class WeakScriptMessageHandler: NSObject, WKScriptMessageHandler {
     weak var delegate: WKScriptMessageHandler?
@@ -33,8 +33,9 @@ class MKWebviewController: MKBaseViewController {
     var allowsBackForwardNavigationGestures = true
     
     var jsCallMessages = [(String, Selector)]()
+    var showClose = true
     
-    private var webView: WKWebView!
+    private(set) var webView: WKWebView!
     private var weakMessageHander: WeakScriptMessageHandler!
     private let progressView = UIProgressView()
     
@@ -68,11 +69,18 @@ class MKWebviewController: MKBaseViewController {
         webView.customUserAgent = "iOS"
         
         // 允许返回
-        webView.addObserver(self, forKeyPath: "canGoBack", options: .new, context: nil)
+        if showClose {
+            webView.addObserver(self, forKeyPath: "canGoBack", options: .new, context: nil)
+        }
         // 加载进度
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         // 标题
         webView.addObserver(self, forKeyPath: "title", options: .new, context: nil)
+        
+        if #available(iOS 16.4, *) {
+            // safari调试
+            webView.isInspectable = true
+        }
         
         view.addSubview(webView)
         webView.snp.makeConstraints { (make) in
@@ -109,7 +117,7 @@ class MKWebviewController: MKBaseViewController {
         if webView.canGoBack {
             webView.goBack()
         } else {
-            popAction()
+            pop()
         }
     }
     
@@ -157,7 +165,7 @@ extension MKWebviewController: WKNavigationDelegate {
             return
         }
         let urlString = url.absoluteString
-        print(urlString)
+        LogInfo("加载：\(urlString)")
         
         /*
         if urlString.hasPrefix("alipay://") || urlString.hasPrefix("alipays://"), let decode = urlString.removingPercentEncoding, let para = decode.components(separatedBy: "?").last, var dic = try? JSONSerialization.jsonObject(with: para.data(using: .utf8)!, options: .init(rawValue: 0)) as? [String : Any] {
