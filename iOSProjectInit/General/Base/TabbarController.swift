@@ -18,6 +18,12 @@ protocol TabbarSource: UIViewController {
     var tabSelectedImage: UIImage? { get }
 }
 
+extension TabbarSource {
+    var jsonImageName: String? { nil }
+    var tabNormalImage: UIImage? { nil }
+    var tabSelectedImage: UIImage? { nil }
+}
+
 class TabbarController: UITabBarController {
     
     fileprivate lazy var transform = Transform()

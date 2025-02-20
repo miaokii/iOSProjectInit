@@ -143,6 +143,8 @@
 		DD6644D92D2D1E3E00AB8682 /* LGButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD6644172D2D1E3E00AB8682 /* LGButton.xib */; };
 		DD6644DA2D2D1E3E00AB8682 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD6644162D2D1E3E00AB8682 /* Ionicons.ttf */; };
 		DD6644DB2D2D1E3E00AB8682 /* octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD66441A2D2D1E3E00AB8682 /* octicons.ttf */; };
+		DD7E7D3C2D66C5B500E80231 /* MKCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E7D3B2D66C5B500E80231 /* MKCollectionViewController.swift */; };
+		DD7E7D3E2D66C64500E80231 /* URL+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E7D3D2D66C64500E80231 /* URL+Ex.swift */; };
 		DDA120D12D32233C00D05E38 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA120D02D32233C00D05E38 /* LocationManager.swift */; };
 		DDA120D82D323A3B00D05E38 /* JXPagingListContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA120D62D323A3B00D05E38 /* JXPagingListContainerView.swift */; };
 		DDA120D92D323A3B00D05E38 /* JXPagingMainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA120D22D323A3B00D05E38 /* JXPagingMainTableView.swift */; };
@@ -297,6 +299,8 @@
 		DD6644532D2D1E3E00AB8682 /* MK.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MK.xcassets; sourceTree = "<group>"; };
 		DD6644552D2D1E3E00AB8682 /* MKBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKBridge.swift; sourceTree = "<group>"; };
 		DD6644DF2D2D1FD800AB8682 /* bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bridging-Header.h"; sourceTree = "<group>"; };
+		DD7E7D3B2D66C5B500E80231 /* MKCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKCollectionViewController.swift; sourceTree = "<group>"; };
+		DD7E7D3D2D66C64500E80231 /* URL+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ex.swift"; sourceTree = "<group>"; };
 		DDA120D02D32233C00D05E38 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		DDA120D22D323A3B00D05E38 /* JXPagingMainTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JXPagingMainTableView.swift; sourceTree = "<group>"; };
 		DDA120D32D323A3B00D05E38 /* JXPagingSmoothView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JXPagingSmoothView.swift; sourceTree = "<group>"; };
@@ -463,6 +467,7 @@
 				DD6643E02D2D1E3E00AB8682 /* MKScrollViewController.swift */,
 				DD6643E12D2D1E3E00AB8682 /* MKTableViewController.swift */,
 				DD6643E22D2D1E3E00AB8682 /* MKWebviewController.swift */,
+				DD7E7D3B2D66C5B500E80231 /* MKCollectionViewController.swift */,
 				DDA120E52D36331800D05E38 /* CustomPresentationController.swift */,
 			);
 			path = Base;
@@ -492,6 +497,7 @@
 				DD6643F02D2D1E3E00AB8682 /* UILabel+Ex.swift */,
 				DD6643F12D2D1E3E00AB8682 /* UITextField+Ex.swift */,
 				DD6643F22D2D1E3E00AB8682 /* UIView+Ex.swift */,
+				DD7E7D3D2D66C64500E80231 /* URL+Ex.swift */,
 			);
 			path = Ex;
 			sourceTree = "<group>";
@@ -907,6 +913,7 @@
 				DD6644682D2D1E3E00AB8682 /* UITextField+Ex.swift in Sources */,
 				DD6644692D2D1E3E00AB8682 /* Sandbox.swift in Sources */,
 				DD66446A2D2D1E3E00AB8682 /* BallPulseAnimation.swift in Sources */,
+				DD7E7D3E2D66C64500E80231 /* URL+Ex.swift in Sources */,
 				DD66446B2D2D1E3E00AB8682 /* MKScrollViewController.swift in Sources */,
 				DD66446C2D2D1E3E00AB8682 /* App+Root.swift in Sources */,
 				DD66446D2D2D1E3E00AB8682 /* MKStaticTableController.swift in Sources */,
@@ -1012,6 +1019,7 @@
 				DD6644C82D2D1E3E00AB8682 /* BallSpinFadeAnimation.swift in Sources */,
 				DD6644C92D2D1E3E00AB8682 /* Logger.swift in Sources */,
 				DD6644CA2D2D1E3E00AB8682 /* FontAwesome.swift in Sources */,
+				DD7E7D3C2D66C5B500E80231 /* MKCollectionViewController.swift in Sources */,
 				DD6644CB2D2D1E3E00AB8682 /* Account.swift in Sources */,
 				DD6644CC2D2D1E3E00AB8682 /* BallPulseSyncAnimation.swift in Sources */,
 				DD6644CD2D2D1E3E00AB8682 /* MKScanQRViewController.swift in Sources */,

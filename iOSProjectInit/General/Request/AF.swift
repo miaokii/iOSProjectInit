@@ -153,6 +153,8 @@ class AF {
     
     /// 注入请求头，或其他
     private func modifierRequest(_ request: inout URLRequest, type: AFType, param: AFParam, header: AFParam) {
+        request.headers.add(name: "client", value: "iOS")
+        request.headers.add(name: "version", value: bundleVersion!)
         /// 添加header
         guard Account.userToken.notEmpty else {
             return
@@ -162,8 +164,6 @@ class AF {
         header.forEach { key, value in
             request.headers.add(name: key, value: string(value: value))
         }
-        request.headers.add(name: "client", value: "iOS")
-        request.headers.add(name: "version", value: bundleVersion!)
     }
     
     /// 五秒内的登录失效只提示一次，而且只在非登录页面提示
