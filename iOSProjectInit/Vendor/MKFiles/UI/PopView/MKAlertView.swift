@@ -215,7 +215,7 @@ class MKAlertView: MKPopParentView {
             
             let cancelBtn = UIButton()
             cancelBtn.setAttributedTitle(cancel.attributedTitle, for: .normal)
-            cancelBtn.setBackgroundImage(.init(color: .white), for: .normal)
+            cancelBtn.setBackgroundImage(.init(color: cancel.backColor), for: .normal)
             cancelBtn.setBackgroundImage(.init(color: .alertSeparator), for: .highlighted)
             footerView.addSubview(cancelBtn)
             cancelBtn.addTarget(self, action: #selector(cancelActionHandler), for: .touchUpInside)
@@ -266,7 +266,7 @@ class MKAlertView: MKPopParentView {
                     }
                     
                     let otherBtn = UIButton.init()
-                    otherBtn.setBackgroundImage(.init(color: .white), for: .normal)
+                    otherBtn.setBackgroundImage(.init(color: otherAC.backColor), for: .normal)
                     otherBtn.setBackgroundImage(.init(color: .alertSeparator), for: .highlighted)
                     otherBtn.setAttributedTitle(otherAC.attributedTitle, for: .normal)
                     footerView.addSubview(otherBtn)
@@ -339,8 +339,10 @@ extension MKAlertView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(type: MKAlertCell.self)
-        cell.set(model: actions[indexPath.row].attributedTitle ?? .init())
+        let action = actions[indexPath.row]
+        cell.set(model: action.attributedTitle ?? .init())
         cell.topLine.isHidden = style == .sheet
+        cell.backColor = action.backColor
         
         if style == .sheet {
             cell.bottomLine.isHidden = indexPath.row == actions.count
@@ -367,6 +369,7 @@ class MKAlertAction: Equatable {
         return attributedTitle?.string ?? ""
     }
     var attributedTitle: NSAttributedString?
+    var backColor: UIColor = .white
     
     fileprivate var style: MKAlertActionType = .default
     private var handler: MKAlertActionHandler? = nil
@@ -375,11 +378,12 @@ class MKAlertAction: Equatable {
         self.attributedTitle = attributedTitle
     }
     
-    static func action(title: String, color: UIColor = .title, style: MKAlertActionType = .default, handler: MKAlertActionHandler? = nil) -> MKAlertAction {
+    static func action(title: String, color: UIColor = .title, backColor: UIColor = .white, style: MKAlertActionType = .default, handler: MKAlertActionHandler? = nil) -> MKAlertAction {
         
         let action = MKAlertAction.init()
         action.style = style
         action.handler = handler
+        action.backColor = backColor
         
         let attTitle = NSMutableAttributedString.init(string: title, attributes: [.foregroundColor: color, .font: UIFont.medium(16)])
         

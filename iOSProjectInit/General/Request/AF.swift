@@ -22,7 +22,7 @@ enum AFType {
     // 请求为post，参数编码到url中
     case postGet
     case delete
-    case upload(files:[(String, Any)])
+    case upload(files:[(name: String, value: Any)])
     
     /// 请求编码
     var encoding: ParameterEncoding {
@@ -97,23 +97,29 @@ class AF {
         
         var dataReqeust: DataRequest
         if case let .upload(files) = type, files.notEmpty {
-            dataReqeust = sessionManager.upload(multipartFormData: { multipartFormData in
+            let uploadRequest = sessionManager.upload(multipartFormData: { multipartFormData in
                 files.forEach { file in
                     // 文件路径
-                    if let filePath = file.1 as? String {
+                    if let filePath = file.value as? String {
                         let fileUrl = URL.init(fileURLWithPath: filePath)
-                        multipartFormData.append(fileUrl, withName: "file")
+                        multipartFormData.append(fileUrl, withName: file.name)
                     }
                     // 文件data
-                    else if let fileData = file.1 as? Data {
-                        multipartFormData.append(fileData, withName: "file", fileName: file.0)
+                    else if let fileData = file.value as? Data {
+                        multipartFormData.append(fileData, withName: file.name, fileName: file.name)
                     }
                 }
-            }, to: fullPath(.uploadFile), requestModifier: requestModifier)
+                param.forEach { (key, value) in
+                    if let data = try? JSONSerialization.data(withJSONObject: value) {
+                        multipartFormData.append(data, withName: key)
+                    }
+                }
+            }, to: fullPath(path), requestModifier: requestModifier)
             
             if let progressHandle = progressHandle {
-                dataReqeust.uploadProgress(closure: progressHandle)
+                uploadRequest.uploadProgress(closure: progressHandle)
             }
+            dataReqeust = uploadRequest
         } else {
             dataReqeust = sessionManager.request(fullPath(path), method: type.method, parameters: param, encoding: type.encoding, requestModifier: requestModifier)
         }

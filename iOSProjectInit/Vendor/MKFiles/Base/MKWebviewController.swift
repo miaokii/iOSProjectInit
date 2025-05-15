@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import WebKit
+@preconcurrency import WebKit
 
 fileprivate class WeakScriptMessageHandler: NSObject, WKScriptMessageHandler {
     weak var delegate: WKScriptMessageHandler?
@@ -126,13 +126,76 @@ class MKWebviewController: MKBaseViewController {
     }
     
     deinit {
-        let types = [WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeOfflineWebApplicationCache, WKWebsiteDataTypeMemoryCache]
-        let websiteDataTypes = Set(types)
+        clearAllWKWebViewCache()
+    }
+    
+    private func clearAllWKWebViewCache() {
+        clearWKWebViewCache()
+        clearURLCache()
+        clearCustomCacheDirectories()
+    }
+    
+    private func clearWKWebViewCache() {
+        // 定义需要清除的数据类型
+        let websiteDataTypes: Set<String> = [
+            WKWebsiteDataTypeDiskCache,
+            WKWebsiteDataTypeMemoryCache,
+            WKWebsiteDataTypeOfflineWebApplicationCache,
+            WKWebsiteDataTypeCookies,
+            WKWebsiteDataTypeSessionStorage,
+            WKWebsiteDataTypeLocalStorage,
+            WKWebsiteDataTypeIndexedDBDatabases,
+            WKWebsiteDataTypeWebSQLDatabases
+        ]
+
+        // 清除从 1970 年 1 月 1 日至今的所有缓存数据
         let dateFrom = Date(timeIntervalSince1970: 0)
         WKWebsiteDataStore.default().removeData(ofTypes: websiteDataTypes, modifiedSince: dateFrom) {
+            print("WKWebView 缓存已清除")
         }
     }
     
+    private func clearURLCache() {
+        URLCache.shared.removeAllCachedResponses()
+        URLCache.shared.diskCapacity = 0
+        URLCache.shared.memoryCapacity = 0
+        print("HTTP 缓存已清除")
+    }
+    
+    private func clearCustomCacheDirectories() {
+        let fileManager = FileManager.default
+
+        // 获取 Library/Caches 目录
+        if let cacheDir = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first {
+            do {
+                // 删除 Library/Caches 目录下的所有文件
+                let cacheFiles = try fileManager.contentsOfDirectory(atPath: cacheDir.path)
+                for file in cacheFiles {
+                    let filePath = cacheDir.appendingPathComponent(file).path
+                    try fileManager.removeItem(atPath: filePath)
+                }
+                print("Library/Caches 目录已清除")
+            } catch {
+                print("清除 Library/Caches 目录时出错: \(error.localizedDescription)")
+            }
+        }
+
+        // 获取 Library/WebKit 目录
+        if let webKitDir = fileManager.urls(for: .libraryDirectory, in: .userDomainMask).first?.appendingPathComponent("WebKit") {
+            do {
+                // 删除 Library/WebKit 目录下的所有文件
+                let webKitFiles = try fileManager.contentsOfDirectory(atPath: webKitDir.path)
+                for file in webKitFiles {
+                    let filePath = webKitDir.appendingPathComponent(file).path
+                    try fileManager.removeItem(atPath: filePath)
+                }
+                print("Library/WebKit 目录已清除")
+            } catch {
+                print("清除 Library/WebKit 目录时出错: \(error.localizedDescription)")
+            }
+        }
+    }
+
     private func updateProgess() {
         progressView.alpha = 1
         progressView.setProgress(Float(webView.estimatedProgress), animated: true)
@@ -212,6 +275,13 @@ extension MKWebviewController: WKNavigationDelegate {
             decisionHandler(.allow)
         }
         */
+        
+        if urlString.hasPrefix("tel:") {
+            if (UIApplication.shared.canOpenURL(url)) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+            return decisionHandler(.cancel)
+        }
         decisionHandler(.allow)
     }
     
@@ -281,7 +351,7 @@ extension MKWebviewController: WKScriptMessageHandler {
         let selector = handle.1
         
         if self.responds(to: selector) {
-            self.perform(selector, with: nil, afterDelay: 0)
+            self.perform(selector, with: message.body, afterDelay: 0)
         }
     }
 }

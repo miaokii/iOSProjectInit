@@ -105,20 +105,37 @@ extension String {
         
         return .init(location: lowerBound, length: upperBound-lowerBound)
     }
+    
+    static func amount(_ value: Double, symbol: Bool = true, separator: String? = ",", maxDigits: Int = 0) -> String {
+        .string(value: value, formatter: { formatter in
+            formatter.numberStyle = .currency
+            if !symbol {
+                formatter.currencySymbol = ""
+            }
+            formatter.maximumFractionDigits = maxDigits
+            formatter.minimumFractionDigits = 0
+            // 不使用有效数字模式
+            formatter.usesSignificantDigits = false
+            if let separator = separator {
+                formatter.usesGroupingSeparator = true
+                formatter.groupingSeparator = separator
+            }
+        })
+    }
 }
 
 extension TimeInterval {
     var durationTime: String {
-        let duration = Int32(self)
-        var durationString = ""
-        if duration < 60 {
-            durationString = String.init(format: "00:%.2d", duration)
-        } else if duration < 3600 {
-            durationString = String.init(format: "%.2d:%.2d", duration / 60, duration % 60)
-        } else {
-            durationString = String.init(format: "%.2d:%.2d:%.2d", duration / 3600, duration % 3600,(duration % 3600) % 60)
+        guard self > 0 else {
+            return ""
         }
-        return durationString
+        
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .positional
+        formatter.zeroFormattingBehavior = .pad
+        
+        return formatter.string(from: self) ?? ""
     }
 }
 
